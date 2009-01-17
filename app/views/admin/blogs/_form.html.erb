@@ -1,0 +1,60 @@
+<%
+  # Partial for displaying a form for creating or editing a blog
+  # Parameters:
+  # blog - blog object to edit or optionally create
+  action = blog.new_record? ? slice_url(:admin_blogs) : slice_url(:edit_admin_blog, blog)
+%>
+
+<%= form_for( blog, :action => action ) do %>
+  <% unless blog.new_record? %>
+    <input name="_method" type="hidden" value="put" />
+  <% end %>
+
+  <dl>
+    <dt><%= label('Title', :for => :title) %></dt>
+    <dd><%= text_field( :title, :size => 50, :class => 'larger' ) %></dd>
+
+    <!-- <dt><label for="category_id">Category</label></dt> -->
+    <%#
+      collection = Category.all.unshift( Category.new ).push( Category.new( :title => '-- Add a new Category --' ) )
+      onclick  = "if(this.value == ''){var title=prompt('What is the name of your new category?');"
+      onclick += "o=this.options[this.selectedIndex];o.value=title;o.innerHTML=title;}"
+    %>
+    <!-- <dd><%#= select_control( :category_id, :collection => collection, :onclick => onclick, :text_method => 'title', :value_method => 'id', :selected => blog.category_id ) %></dd> -->
+
+    <dt><%= label('Published?', :for => 'blog_publish') %></dt>
+    <dd>
+      <%= check_box( :published ) %>
+      <% if @blog.published %>
+        <%= "Published at #{ @blog.published }" %>
+      <% end %>
+    </dd>
+
+    <!-- <dt><label for="blog_comments_expire_at">Comment expiration</label></dt> -->
+
+    <!-- <dd>
+          <select name="blog[comments_expire_at][year]">
+                  <%#=
+                    collection = ( Date.today.year .. Date.today.year + 4 ).to_a
+                    options_for( collection, :selected => blog.comments_expire_at.try(:year) )
+                  %>
+                </select>
+                <select name="blog[comments_expire_at][month]">
+                  <%#=
+                    collection = ( 1 .. 12 ).to_a
+                    options_for( collection, :selected => blog.comments_expire_at.try(:month) )
+                  %>
+                </select>
+                <select name="blog[comments_expire_at][day]">
+                  <%#=
+                    collection = ( 1 .. 31 ).to_a
+                    options_for( collection, :selected => blog.comments_expire_at.try(:day) )
+                  %>
+                </select>
+        </dd>-->
+
+    <dt><label for="body">Body</label></dt>
+    <dd><%= text_area( :body, :cols => 50, :rows => 20, :class => 'larger' ) %></dd>
+    <dd><%= submit( 'Save blog' ) %></dd>
+  </dl>
+<% end =%>

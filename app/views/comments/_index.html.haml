@@ -1,0 +1,26 @@
+:ruby
+  # Partial for displaying a list of comments
+  # ==== Parameters
+  # blog<Blog>:: the blog to which the comments are attached
+
+#comments
+  %h2{ :style => 'font-size:1.5em;' } Comments
+
+  %ul.unlist
+    - for comment in blog.comments
+      - next if comment.new_record?
+      %li.dot
+        = print_date( comment.created_at ) unless comment.created_at.nil?
+        .comment
+          %strong= link_to_author( comment )
+          = comment.body
+          = comment_actions( comment ) if logged_in?
+        .clear
+
+  - if blog.comments_closed?
+    %p Comments are closed
+  - else
+    #comment_form
+      - url     = url(:new_blog_comment, :blog_id => blog.id, :format => :js)
+      - onclick = "$('#comment_form').load('#{ url }'); return false;"
+      %a{ :href => '#', :onclick => onclick } Add a comment

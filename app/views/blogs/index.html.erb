@@ -1,0 +1,20 @@
+%h2= '%s Blogs' % ( @category.try(:title) || 'All' )
+
+%ul.unlist#blogs
+  - for blog in @blogs
+    - css_class = blog.published_at ? 'published' : 'unpublished'
+    %li.preview.dot{ :class => "#{ css_class }" }
+
+      = print_date( blog.published_at || blog.created_at )
+      .blog
+        %h3
+          %a{ :href => "#{ url(:blog_by_date, blog) }" }= blog.title
+        = blog.preview
+
+- if @blogs.prev
+  - opts = { :page => @blogs.prev.number }
+  %a{ :href => "#{ @category ? url(:category, opts.merge( :category_title => @category.title )): url(:blogs, opts) }" } Previous
+
+- if @blogs.next
+  - opts = { :page => @blogs.next.number }
+  %a{ :href => "#{ @category ? url(:category, opts.merge( :category_title => @category.title )): url(:blogs, opts) }" } Next
