@@ -1,4 +1,11 @@
-<h2><%= @blog.title %></h2>
+<% throw_content :for_header do %>
+  <h1>
+    <%= @blog.title %>
+    <a href="<%= slice_url(:home) %>">All blogs</a>
+    <a href="<%= slice_url(:edit_admin_blog, @blog) %>">Edit</a>
+  </h1>
+<% end %>
+
 <small><%= @blog.published_at.strftime( '%A, %d %B %Y') if @blog.published_at %></small>
 
 <%= @blog.body_html %>

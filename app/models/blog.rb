@@ -54,6 +54,10 @@ class Blog
     all( :conditions => ['published_at IS NOT NULL'], :order => 'published_at DESC', :limit => per_page )
   end
 
+  def self.pages
+    all( :page.not => nil )
+  end
+
   # Returns a paginator object for paginating blogs.
   #
   # ==== Parameters

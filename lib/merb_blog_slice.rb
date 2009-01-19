@@ -90,7 +90,7 @@ if defined?(Merb::Plugins)
       scope.default_routes
 
       # Change this for your home page to be available at /
-      scope.match('/').to(:controller => 'blogs', :action =>'index' )
+      scope.match('/').to(:controller => 'blogs', :action =>'index' ).name( :home )
 
 
 

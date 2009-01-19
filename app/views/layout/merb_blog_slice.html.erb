@@ -3,13 +3,18 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Fresh MerbBlogSlice Slice</title>
-    <!-- <link href="<%= public_path_for :stylesheet, 'master.css' %>" type="text/css" charset="utf-8" rel="stylesheet" media="all" /> -->
+    <link href="<%= public_path_for :stylesheet, 'master.css' %>" type="text/css" charset="utf-8" rel="stylesheet" media="all" />
     <!-- <script src="<%= public_path_for :javascript, 'master.js' %>" type="text/javascript" charset="utf-8"></script> -->
   </head>
   <!-- you can override this layout at slices/merb_blog_slice/app/views/layout/merb_blog_slice.html.erb -->
   <body class="merb_blog_slice-slice">
-  <div id="container">
-    <div id="main"><%= catch_content :for_layout %></div>
-  </div>
+    <div class="wrapper">
+      <div id="header">
+        <%= catch_content :for_header %>
+      </div>
+      <div id="content">
+        <%= catch_content :for_layout %>
+      </div>
+    </div>
   </body>
 </html>

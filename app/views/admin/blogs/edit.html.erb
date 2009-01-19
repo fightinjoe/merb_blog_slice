@@ -1,1 +1,9 @@
+<% throw_content :for_header do %>
+  <h1>
+    Edit: <span style="font-weight:normal"><%= @blog.title %></span>
+    <a href="<%= slice_url(:home) %>">All blogs</a>
+    <a href="<%= slice_url(:blog_by_date, @blog.year, @blog.month, @blog.path_title) %>">Cancel</a>
+  </h1>
+<% end %>
+
 <%= partial( :form, :blog => @blog, :method => :put ) %>

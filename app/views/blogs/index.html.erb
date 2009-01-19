@@ -1,4 +1,11 @@
-<h2>All Blogs</h2>
+<% throw_content :for_header do %>
+  <h1>
+    All Blogs
+    <% for page in Blog.pages %>
+      <a href="<%= slice_url(:blog_by_date, page.year, page.month, page.path_title) %>"><%= page.title %></a>
+    <% end %>
+  </h1>
+<% end %>
 
 <ul class="unlist" id="blogs">
   <% for blog in @blogs %>
@@ -11,7 +18,7 @@
         </h3>
         <p class="tags">
           <% for tag in blog.tags %>
-            <span><%= tag.name %></span>
+            <span class="tag">&nbsp;<%= tag.name %>&nbsp;</span>
           <% end %>
         </p>
         <%= blog.preview %>
