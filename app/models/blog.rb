@@ -16,6 +16,8 @@ class Blog
   property :year,         Integer
   property :month,        Integer
   property :permalink,    Text
+  property :page,         Integer
+
 #  property :comments_expire_at, DateTime #, :reflect => :parse_date
 #  property :parent_id,    Integer
 

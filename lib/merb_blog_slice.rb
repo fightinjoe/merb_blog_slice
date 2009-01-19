@@ -53,9 +53,9 @@ if defined?(Merb::Plugins)
     # @note prefix your named routes with :merb_blog_slice_
     #   to avoid potential conflicts with global named routes.
     def self.setup_router(scope)
-      scope.match("/login").to(:controller => "Sessions", :action => "create").name(:login)
-      scope.match("/logout").to(:controller => "Sessions", :action => "destroy").name(:logout)
-      scope.resources :users
+      #scope.match("/login").to(:controller => "Sessions", :action => "create").name(:login)
+      #scope.match("/logout").to(:controller => "Sessions", :action => "destroy").name(:logout)
+      #scope.resources :users
 
       scope.namespace :admin do |admin|
         admin.resources :blogs
@@ -75,17 +75,19 @@ if defined?(Merb::Plugins)
       # NAMED routes
       scope.match('/contact').to( :controller => 'comments', :action => 'new' ).name( :contact )
 
-      scope.match('/:category_title').to( :controller => 'blogs', :action => 'index' ).name( :category )
+      # scope.match('/:category_title').to( :controller => 'blogs', :action => 'index' ).name( :category )
       # resources :posts
+
+      # Used for path generation
+      scope.match('/:year/:month/:path_title').to( :controller => 'blogs', :action => 'show' ).name( :blog_by_date )
+
+      scope.match('/:path_title').to( :controller => 'blogs', :action => 'page' ).name( :page )
 
       # This is the default route for /:controller/:action/:id
       # This is fine for most cases.  If you're heavily using resource-based
       # routes, you may want to comment/remove this line to prevent
       # clients from calling your create or destroy actions with a GET
       scope.default_routes
-
-      # Used for path generation
-      scope.match('/:year/:month/:path_title').to( :controller => 'blogs', :action => 'show' ).name( :blog_by_date )
 
       # Change this for your home page to be available at /
       scope.match('/').to(:controller => 'blogs', :action =>'index' )

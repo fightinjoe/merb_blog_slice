@@ -14,6 +14,12 @@ class MerbBlogSlice::Blogs < MerbBlogSlice::Application
     render
   end
 
+  def page
+    @blog = Blog.first( :path_title => params[:path_title], :page.not => nil )
+    raise NotFound unless @blog
+    render :show
+  end
+
   private
 
     def index_rss
@@ -26,17 +32,17 @@ class MerbBlogSlice::Blogs < MerbBlogSlice::Application
 
       raise NotFound if title && @category.nil?
 
-      options = {} #{ :category_id => (@category ? @category.id : nil), :category_id.not => @about.id }
+      options = { :page => nil } #{ :category_id => (@category ? @category.id : nil), :category_id.not => @about.id }
       @blogs  = Blog.paginate( options ).page( params[:page] )
     end
 
     def find_blog
-      id, page_title, month, year = params[:id], params[:path_title], params[:month], params[:year]
+      id, path_title, month, year = params[:id], params[:path_title], params[:month], params[:year]
       if id == 'latest'
         #@about = Category.first(:title => 'About')
         @blog  = Blog.last #( :category_id.not => (@about ? @about.id : -1) )
       else
-        @blog = id ? Blog.get( id ) : Blog.first( :path_title => page_title, :year => year, :month => month )
+        @blog = id ? Blog.get( id ) : Blog.first( :path_title => path_title, :year => year, :month => month )
       end
       raise NotFound unless @blog
     end
