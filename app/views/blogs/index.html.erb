@@ -1,20 +1,26 @@
-%h2= '%s Blogs' % ( @category.try(:title) || 'All' )
+<h2>All Blogs</h2>
 
-%ul.unlist#blogs
-  - for blog in @blogs
-    - css_class = blog.published_at ? 'published' : 'unpublished'
-    %li.preview.dot{ :class => "#{ css_class }" }
+<ul class="unlist" id="blogs">
+  <% for blog in @blogs %>
+    <% css_class = blog.published_at ? 'published' : 'unpublished' %>
+    <li class="preview dot <%= css_class %>">
+      <%= print_date( blog.published_at || blog.created_at ) %>
+      <div class="blog">
+        <h3>
+          <a href="<%= slice_url(:blog_by_date, blog.year, blog.month, blog.path_title) %>"><%= blog.title %></a>
+        </h3>
+        <%= blog.preview %>
+      </div>
+    </li>
+  <% end %>
+</ul>
 
-      = print_date( blog.published_at || blog.created_at )
-      .blog
-        %h3
-          %a{ :href => "#{ url(:blog_by_date, blog) }" }= blog.title
-        = blog.preview
+<% if @blogs.prev %>
+  <% opts = { :page => @blogs.prev.number } %>
+  <a href="<%= @category ? slice_url(:category, opts.merge( :category_title => @category.title )): slice_url(:blogs, opts) %>">Previous</a>
+<% end %>
 
-- if @blogs.prev
-  - opts = { :page => @blogs.prev.number }
-  %a{ :href => "#{ @category ? url(:category, opts.merge( :category_title => @category.title )): url(:blogs, opts) }" } Previous
-
-- if @blogs.next
-  - opts = { :page => @blogs.next.number }
-  %a{ :href => "#{ @category ? url(:category, opts.merge( :category_title => @category.title )): url(:blogs, opts) }" } Next
+<% if @blogs.next %>
+  <% opts = { :page => @blogs.next.number } %>
+  <a href="<%= @category ? slice_url(:category, opts.merge( :category_title => @category.title )): slice_url(:blogs, opts) %>">Next</a>
+<% end %>

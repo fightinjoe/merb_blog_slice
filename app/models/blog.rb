@@ -122,12 +122,12 @@ class Blog
     '<p>%s...</p>' % paras[0...paragraphs].join('</p><p>')
   end
 
-  def count_comments
-    Comment.count( :conditions => ['comments.blog_id = ?', self.id] )
-  end
+  #def count_comments
+  #  Comment.count( :conditions => ['comments.blog_id = ?', self.id] )
+  #end
 
-  def body()      @body      || ''; end
-  def body_html() @body_html || ''; end
+  #def body()      @body      || ''; end
+  #def body_html() @body_html || ''; end
 
   private
 

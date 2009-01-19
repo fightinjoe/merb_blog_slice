@@ -31,12 +31,12 @@ class Blogs < MerbBlogSlice::Application
   end
 
   def update
-    @blog = Blog.first(params[:id])
+    @blog = Blog.get(params[:id])
     raise NotFound unless @blog
     if @blog.update_attributes(params[:blog])
-      flash[:notice] = 'Success!  Your blog has been updated.'
+      #flash[:notice] = 'Success!  Your blog has been updated.'
       sweep_cache
-      redirect url(:admin_blogs, @blog)
+      redirect slice_url(:admin_blogs)
     else
       raise BadRequest
     end
@@ -70,9 +70,9 @@ class Blogs < MerbBlogSlice::Application
     end
 
     def sweep_cache
-      expire_page( :key => '/index' )
-      expire_page( :key => url(:blog_by_date, @blog) )
-      expire_page( :key => '/blogs.rss' )
+      #expire_page( :key => '/index' )
+      #expire_page( :key => url(:blog_by_date, @blog) )
+      #expire_page( :key => '/blogs.rss' )
     end
 
 end

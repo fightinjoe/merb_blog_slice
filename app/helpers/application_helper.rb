@@ -2,7 +2,7 @@ module Merb
   module MerbBlogSlice
     module ApplicationHelper
 
-      def link( title, url, opts )
+      def link( title, url, opts={} )
         opts[:href] = url
         '<a %s>%s</a>' % [ opts.collect {|k,v| '%s="%s"' % [k,v] }.join(' '), url]
       end

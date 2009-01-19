@@ -2,7 +2,7 @@
   # Partial for displaying a form for creating or editing a blog
   # Parameters:
   # blog - blog object to edit or optionally create
-  action = blog.new_record? ? slice_url(:admin_blogs) : slice_url(:edit_admin_blog, blog)
+  action = blog.new_record? ? slice_url(:admin_blogs) : slice_url(:admin_blog, blog)
 %>
 
 <%= form_for( blog, :action => action ) do %>

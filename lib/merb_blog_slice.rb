@@ -88,7 +88,7 @@ if defined?(Merb::Plugins)
       scope.match('/:year/:month/:path_title').to( :controller => 'blogs', :action => 'show' ).name( :blog_by_date )
 
       # Change this for your home page to be available at /
-      scope.match('/').to(:controller => 'blogs', :action =>'show', :id => 'latest' )
+      scope.match('/').to(:controller => 'blogs', :action =>'index' )
 
 
 
