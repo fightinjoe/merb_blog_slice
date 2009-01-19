@@ -9,6 +9,11 @@
         <h3>
           <a href="<%= slice_url(:blog_by_date, blog.year, blog.month, blog.path_title) %>"><%= blog.title %></a>
         </h3>
+        <p class="tags">
+          <% for tag in blog.tags %>
+            <span><%= tag.name %></span>
+          <% end %>
+        </p>
         <%= blog.preview %>
       </div>
     </li>

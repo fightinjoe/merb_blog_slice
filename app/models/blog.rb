@@ -24,6 +24,9 @@ class Blog
 #  belongs_to :category
 #  has n, :comments
 
+  has n, :blog_tags
+  has n, :tags, :through => :blog_tags
+
   #validates_present :title
 
   before :create, :set_path_title
@@ -73,6 +76,22 @@ class Blog
     ::Paginator.new( count, per_page ) do |offset, per_page|
       all( default_options.merge(options).merge( :limit => pp, :offset => offset ) )
     end
+  end
+
+  #==== Tags ====#
+  def tags_as_string
+    tags.collect { |t| t.name }.join(', ')
+  end
+
+  def tags_as_string=( str )
+    blog_tags.clear
+    str.split(',').each { |t|
+      add_tag Tag.first_or_create( :name => t.strip )
+    }
+  end
+
+  def add_tag( tag )
+    BlogTag.create( :blog => self, :tag => tag )
   end
 
   private

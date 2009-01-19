@@ -24,7 +24,7 @@ class Blogs < MerbBlogSlice::Application
   def create
     @blog = Blog.new(params[:blog])
     if @blog.save
-      redirect slice_url(:blog, @blog)
+      redirect slice_url(:admin_blogs)
     else
       render :action => :new
     end
