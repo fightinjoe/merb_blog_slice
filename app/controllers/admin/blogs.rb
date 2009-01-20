@@ -1,7 +1,7 @@
 module MerbBlogSlice::Admin
 class Blogs < MerbBlogSlice::Application
   before :find_blog, :only => %w(show edit destroy)
-  #before :login_required
+  before :login_required
   #before :configure_layout
 
   def index

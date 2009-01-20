@@ -9,7 +9,7 @@ AUTHOR = "Aaron Wheeler"
 EMAIL = "fightinjoe@gmail.com"
 HOMEPAGE = "http://fightinjoe.com"
 SUMMARY = "A slice for Merb 1.0 that provides simple blog functionality. Required DataMapper."
-GEM_VERSION = "1.0.7.1"
+GEM_VERSION = "1.0"
 
 spec = Gem::Specification.new do |s|
   s.rubyforge_project = 'merb'
@@ -23,7 +23,7 @@ spec = Gem::Specification.new do |s|
   s.author = AUTHOR
   s.email = EMAIL
   s.homepage = HOMEPAGE
-  s.add_dependency('merb-slices', '>= 1.0.7.1')
+  s.add_dependency('merb-slices', '>= 1.0')
   s.require_path = 'lib'
   s.files = %w(LICENSE README Rakefile TODO) + Dir.glob("{lib,spec,app,public,stubs}/**/*")
 end
