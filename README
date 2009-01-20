@@ -1,6 +1,10 @@
 MerbBlogSlice
 =============
 
+A slice for Merb 1.0 that provides simple blog functionality. Required DataMapper.
+
+==== Merb generated documentation
+
 A slice for the Merb framework.
 
 ------------------------------------------------------------------------------

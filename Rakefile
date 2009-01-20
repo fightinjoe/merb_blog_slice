@@ -5,10 +5,10 @@ require 'merb-core'
 require 'merb-core/tasks/merb'
 
 GEM_NAME = "merb_blog_slice"
-AUTHOR = "Your Name"
-EMAIL = "Your Email"
-HOMEPAGE = "http://merbivore.com/"
-SUMMARY = "Merb Slice that provides ..."
+AUTHOR = "Aaron Wheeler"
+EMAIL = "fightinjoe@gmail.com"
+HOMEPAGE = "http://fightinjoe.com"
+SUMMARY = "A slice for Merb 1.0 that provides simple blog functionality. Required DataMapper."
 GEM_VERSION = "1.0.7.1"
 
 spec = Gem::Specification.new do |s|
