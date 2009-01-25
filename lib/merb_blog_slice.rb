@@ -4,6 +4,7 @@ if defined?(Merb::Plugins)
 
   dependency 'merb-slices', :immediate => true
   dependency 'merb-helpers'
+  dependency 'dm-aggregates'
   Merb::Plugins.add_rakefiles "merb_blog_slice/merbtasks", "merb_blog_slice/slicetasks", "merb_blog_slice/spectasks"
 
   # Register the Slice for the current host application

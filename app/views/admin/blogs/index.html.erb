@@ -1,7 +1,7 @@
 <h2>Admin</h2>
 
 <ul class="unlist horizontal actions right">
-  <li><%= link('New', slice_url(:new_admin_blog)) %></li>
+  <li><a href="<%= slice_url(:new_admin_blog) %>">Create a new blog</a></li>
 </ul>
 
 <table class="clear" style="width:100%">
@@ -9,19 +9,19 @@
     <tr>
       <th>Created</th>
       <th>Pub.</th>
-      <th>Category</th>
+      <!-- <th>Category</th> -->
       <th>Title</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    <% for blog in @blogs %>
-      <tr>
-        <td style="width:50%;"><%= print_date( blog.created_at ) %></td>
-        <td style="width:50%;"><%= print_date( blog.published_at ) if blog.published_at %></td>
-        <td style="width:100px;">
-          <%#= (cat = blog.category) ? link( cat.title, slice_url(:admin_blogs, :category_id => cat.id) ) : nil %>
-        </td>
+    <% @blogs.each_with_index do |blog, i| %>
+      <tr class="<%= i%2 == 0 ? 'even' : 'odd' %>">
+        <td class="date_created"><%= print_date( blog.created_at ) %></td>
+        <td class="date_published"><%= print_date( blog.published_at ) if blog.published_at %></td>
+        <!-- <td style="width:100px;">
+                  <%#= (cat = blog.category) ? link( cat.title, slice_url(:admin_blogs, :category_id => cat.id) ) : nil %>
+                </td> -->
         <td>
           <% if blog.published? %>
             <%= link( blog.title, slice_url(:blog_by_date, blog.year, blog.month, blog.path_title), :target => '_blank' ) %>

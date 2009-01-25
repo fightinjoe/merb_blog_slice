@@ -32,7 +32,8 @@ class MerbBlogSlice::Blogs < MerbBlogSlice::Application
 
       raise NotFound if title && @category.nil?
 
-      options = { :page => nil } #{ :category_id => (@category ? @category.id : nil), :category_id.not => @about.id }
+      options = { :page => nil, :published_at.not => nil }
+      #{ :category_id => (@category ? @category.id : nil), :category_id.not => @about.id }
       @blogs  = Blog.paginate( options ).page( params[:page] )
     end
 

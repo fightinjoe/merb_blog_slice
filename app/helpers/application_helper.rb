@@ -4,7 +4,7 @@ module Merb
 
       def link( title, url, opts={} )
         opts[:href] = url
-        '<a %s>%s</a>' % [ opts.collect {|k,v| '%s="%s"' % [k,v] }.join(' '), url]
+        '<a %s>%s</a>' % [ opts.collect {|k,v| '%s="%s"' % [k,v] }.join(' '), title]
       end
 
       # @param *segments<Array[#to_s]> Path segments to append.
